@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Fetish Conditioning Protocol</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">FCP</div>
+      <h1>Fetish Conditioning Protocol</h1>
+      <p class="tagline">Daily injection. 30–60 minutes. Build the addiction. No escape hatches without cost.</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status Bar -->
+    <section class="card status-card">
+      <div class="stat">
+        <span class="stat-label">Days Completed</span>
+        <span class="stat-value" id="daysCompleted">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Current Streak</span>
+        <span class="stat-value" id="streak">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Fetishes Locked</span>
+        <span class="stat-value" id="lockedCount">0</span>
+      </div>
+    </section>
+
+    <!-- Daily Assignment -->
+    <section class="card" id="assignmentCard">
+      <h2>Today’s Injection</h2>
+      <div id="noAssignment">
+        <p class="muted">No fetish assigned yet.</p>
+        <button class="primary-btn" onclick="assignFetish()">Generate Today’s Fetish</button>
+      </div>
+
+      <div id="assignmentActive" style="display:none;">
+        <div class="fetish-header">
+          <span class="intensity" id="intensityBadge">MEDIUM</span>
+          <h3 id="fetishName">—</h3>
+        </div>
+        <p class="fetish-desc" id="fetishDesc"></p>
+
+        <div class="materials-section">
+          <h4>Materials Checklist</h4>
+          <p class="small-muted">Check what you actually have. The session will adapt.</p>
+          <div id="materialsList"></div>
+        </div>
+
+        <div class="session-actions">
+          <button class="primary-btn" onclick="startSession()">Start Session</button>
+          <button class="secondary-btn" onclick="showSkipOptions()">I want to skip / remove this</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Session View -->
+    <section class="card" id="sessionCard" style="display:none;">
+      <div class="session-top">
+        <h2 id="sessionTitle">Session</h2>
+        <div class="timer" id="timer">00:00</div>
+      </div>
+      <div id="sessionSteps"></div>
+      <div class="session-footer">
+        <button class="primary-btn" id="completeBtn" onclick="completeSession()" style="display:none;">Mark Session Complete</button>
+        <button class="danger-btn" onclick="abortSession()">Abort (counts as skip)</button>
+      </div>
+    </section>
+
+    <!-- Skip / Remove Modal -->
+    <section class="card danger-card" id="skipCard" style="display:none;">
+      <h2>Deviation Request</h2>
+      <p>Skipping or permanently removing a fetish triggers conditioning consequences. The more permanent the refusal, the heavier the price.</p>
+
+      <div class="skip-options">
+        <button class="secondary-btn" onclick="applySkip('postpone')">
+          Postpone to another day
+          <span class="punish-level">Punishment: Moderate</span>
+        </button>
+        <button class="danger-btn" onclick="applySkip('remove')">
+          Permanently remove this fetish
+          <span class="punish-level">Punishment: Severe</span>
+        </button>
+      </div>
+      <button class="text-btn" onclick="closeSkip()">Never mind — I’ll do it</button>
+    </section>
+
+    <!-- Punishment Display -->
+    <section class="card punishment-card" id="punishmentCard" style="display:none;">
+      <h2>Consequence Assigned</h2>
+      <div id="punishmentContent"></div>
+      <button class="primary-btn" onclick="acceptPunishment()">I accept the consequence</button>
+    </section>
+
+    <!-- History / Locked Fetishes -->
+    <section class="card">
+      <h2>Conditioning Log</h2>
+      <div id="historyList" class="history-list">
+        <p class="muted">No sessions completed yet.</p>
+      </div>
+    </section>
+
+    <!-- Rules -->
+    <section class="card rules">
+      <h2>Protocol Rules</h2>
+      <ol>
+        <li>One primary fetish (or mix) is injected per day.</li>
+        <li>Session length: 30–60 minutes. Do not rush. The goal is neurological attachment, not just orgasm.</li>
+        <li>Materials checklist adapts the protocol. Honesty here improves results.</li>
+        <li>Postponing moves the fetish later and triggers moderate consequences.</li>
+        <li>Permanent removal is allowed but carries severe, escalating consequences.</li>
+        <li>By the end of a proper session you should feel a pull toward that fetish. That is the point.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <p>Fetish Conditioning Protocol · Local only · Progress saved in browser</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
