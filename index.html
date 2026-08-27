@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Fetish Conditioning Protocol</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">FCP</div>
+      <h1>Fetish Conditioning Protocol</h1>
+      <p class="tagline">Daily injection. Media-driven. Build the craving until it owns you.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="card status-card">
+      <div class="stat">
+        <span class="stat-label">Days Completed</span>
+        <span class="stat-value" id="daysCompleted">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Current Streak</span>
+        <span class="stat-value" id="streak">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Fetishes Locked</span>
+        <span class="stat-value" id="lockedCount">0</span>
+      </div>
+    </section>
+
+    <section class="card" id="customizeCard">
+      <h2>Session Setup</h2>
+      <p class="small-muted">Choose length, intensity, and focus before the fetish is assigned.</p>
+
+      <div class="control-group">
+        <label>Session Length</label>
+        <div class="pill-group" id="lengthPills">
+          <button class="pill active" data-value="30">30 min</button>
+          <button class="pill" data-value="45">45 min</button>
+          <button class="pill" data-value="60">60 min</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Task Intensity</label>
+        <div class="pill-group" id="intensityPills">
+          <button class="pill active" data-value="standard">Standard</button>
+          <button class="pill" data-value="hard">Hard</button>
+          <button class="pill" data-value="brutal">Brutal</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Focus</label>
+        <div class="pill-group" id="focusPills">
+          <button class="pill active" data-value="media">Media Heavy</button>
+          <button class="pill" data-value="mixed">Mixed</button>
+        </div>
+      </div>
+
+      <button class="primary-btn full" onclick="assignFetish()">Generate Today’s Fetish</button>
+    </section>
+
+    <section class="card" id="assignmentCard" style="display:none;">
+      <h2>Today’s Injection</h2>
+      <div class="fetish-header">
+        <span class="intensity" id="intensityBadge">MEDIUM</span>
+        <h3 id="fetishName">—</h3>
+      </div>
+      <p class="fetish-desc" id="fetishDesc"></p>
+
+      <div class="materials-section">
+        <h4>Materials / Setup</h4>
+        <p class="small-muted">Check everything you have. Missing items will change the tasks.</p>
+        <div id="materialsList"></div>
+      </div>
+
+      <div class="session-actions">
+        <button class="primary-btn full" onclick="startSession()">Begin Conditioning Session</button>
+        <button class="secondary-btn full" onclick="showSkipOptions()">Skip or permanently remove</button>
+      </div>
+    </section>
+
+    <section class="card" id="sessionCard" style="display:none;">
+      <div class="session-top">
+        <h2 id="sessionTitle">Session</h2>
+        <div class="timer" id="timer">00:00</div>
+      </div>
+      <div id="sessionIntro" class="session-intro"></div>
+      <div id="sessionSteps"></div>
+      <div class="session-footer">
+        <button class="primary-btn full" id="completeBtn" onclick="completeSession()" style="display:none;">Mark Complete & Lock Fetish</button>
+        <button class="danger-btn full" onclick="abortSession()">Abort (counts as skip)</button>
+      </div>
+    </section>
+
+    <section class="card danger-card" id="skipCard" style="display:none;">
+      <h2>Deviation Request</h2>
+      <p>Refusing a fetish has consequences. Punishment scales with permanence and the type of fetish you tried to escape.</p>
+      <div class="skip-options">
+        <button class="secondary-btn full" onclick="applySkip('postpone')">
+          Postpone to another day
+          <span class="punish-level">Moderate consequence</span>
+        </button>
+        <button class="danger-btn full" onclick="applySkip('remove')">
+          Permanently remove this fetish
+          <span class="punish-level">Severe consequence</span>
+        </button>
+      </div>
+      <button class="text-btn" onclick="closeSkip()">Never mind — I’ll do the session</button>
+    </section>
+
+    <section class="card punishment-card" id="punishmentCard" style="display:none;">
+      <h2>Consequence</h2>
+      <div id="punishmentContent"></div>
+      <button class="primary-btn full" onclick="acceptPunishment()">I accept</button>
+    </section>
+
+    <section class="card">
+      <h2>Conditioning Log</h2>
+      <div id="historyList" class="history-list">
+        <p class="muted">No sessions completed yet.</p>
+      </div>
+    </section>
+
+    <section class="card rules">
+      <h2>Protocol Rules</h2>
+      <ol>
+        <li>You set length and intensity. The system assigns the fetish.</li>
+        <li>Sessions are media-first. Exact search terms and watch instructions are given.</li>
+        <li>The narrator is deeply into the specific fetish. Language is intentional.</li>
+        <li>Missing materials change the tasks. Be honest.</li>
+        <li>Postponing or removing triggers fetish-aware consequences and resets streak.</li>
+        <li>Every session should leave you wanting that specific thing more than before.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <p>Fetish Conditioning Protocol · Local only · Progress saved in browser</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
